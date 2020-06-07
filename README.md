@@ -42,7 +42,7 @@ Run [Autoencoder.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph
 
 ## Graph Classification
 
-Run [Classification.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Classification.py) to train a graph classifier. Additional classification datasets are available [here](https://chrsmrrs.github.io/datasets/) and [here](https://github.com/FilippoMB/Benchmark_dataset_for_graph_classification).
+Run [Classification.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Classification.py) to train a graph classifier. Additional classification datasets are available [here](https://chrsmrrs.github.io/datasets/) (drop them in ````data/classification/````) and [here](https://github.com/FilippoMB/Benchmark_dataset_for_graph_classification) (drop them in ````data/````).
 Results are provided in terms of classification accuray averaged over 10 folds.
 
 ## Citation
