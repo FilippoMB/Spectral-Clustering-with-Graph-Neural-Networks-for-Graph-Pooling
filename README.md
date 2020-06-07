@@ -3,7 +3,7 @@ Experimental results obtained with the MinCutPool layer as presented in the 2020
 
 <img src="./figs/mincutpool.png" width="350" height="150">
 
-This repository is based on [MinCutPool implementation](https://graphneural.network/layers/pooling/#mincutpool) provided by [Spektral](https://graphneural.network/). A Pytorch implementation of MinCutPool is also available in the [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool) library.
+This repository is based on [MinCutPool implementation](https://graphneural.network/layers/pooling/#mincutpool) provided by [Spektral](https://graphneural.network/), the Keras/TensorFlow library for Graph Neural Networks. A Pytorch implementation of MinCutPool is also available in the [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool) library.
 
 **Required libraries**
 
@@ -38,7 +38,7 @@ Resutls are provided in terms of homogeneity score, completeness score, and norm
 <img src="./figs/ae_ring.png" width="400" height="200">
 <img src="./figs/ae_grid.png" width="400" height="200">
 
-Run [Autoencoder.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Autoencoder.py) to compute the reconstruction from an Autoencoder with bottleneck. It is possible to switch between the ````ring```` and ````grid````, but also the other point-clouds dataset from the PyGSP library are supported. Results are provided in terms of Mean Squared Error.
+Run [Autoencoder.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Autoencoder.py) to compute the reconstruction from an Autoencoder with bottleneck. It is possible to switch between the ````ring```` and ````grid````, but also the other [point-clouds datasets](https://pygsp.readthedocs.io/en/stable/reference/graphs.html?highlight=bunny#graph-models) from the [PyGSP](https://pygsp.readthedocs.io/en/stable/index.html) library are supported. Results are provided in terms of Mean Squared Error.
 
 ## Graph Classification
 
