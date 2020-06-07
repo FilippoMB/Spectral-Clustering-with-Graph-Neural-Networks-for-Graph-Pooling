@@ -1,5 +1,4 @@
 from collections import OrderedDict
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -8,7 +7,6 @@ import tensorflow as tf
 from keras import backend as K
 from keras.layers import Input
 from keras.models import Model
-#from keras.regularizers import l2
 from pygsp import graphs
 from sklearn.cluster import spectral_clustering
 from sklearn.datasets.samples_generator import make_blobs
@@ -18,11 +16,9 @@ from spektral.layers.convolutional import GraphConvSkip
 from spektral.utils import init_logging
 from spektral.utils.convolution import normalized_adjacency
 from tqdm import tqdm
-
 from layers import DiffPool, MincutPool
 from utils import citation
 from utils.misc import sp_matrix_to_sp_tensor_value, product_dict
-
 np.random.seed(0)  # for reproducibility
 
 PLOTS_ON = True
