@@ -1,7 +1,7 @@
 # Spectral Clustering with Graph Neural Networks for Graph Pooling
 Experimental results obtained with the MinCutPool layer as presented in the 2020 ICML paper [Spectral Clustering with Graph Neural Networks for Graph Pooling](https://arxiv.org/abs/1907.00481)
 
-<img src="./figs/mincutpool.png" width="350" height="150">
+<img src="./figs/mincutpool.png" width="400" height="200">
 
 This repository is based on [MinCutPool implementation](https://graphneural.network/layers/pooling/#mincutpool) provided by [Spektral](https://graphneural.network/), the Keras/TensorFlow library for Graph Neural Networks. A Pytorch implementation of MinCutPool is also available in the [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool) library.
 
