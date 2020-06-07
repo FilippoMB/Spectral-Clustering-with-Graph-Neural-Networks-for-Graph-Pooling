@@ -7,7 +7,7 @@ This repository is based on [MinCutPool implementation](https://graphneural.netw
 
 **Required libraries**
 
-- spektral
+- spektral (tested on v.1.2)
 - tensorflow (tested on v.1.14)
 - keras (tested on v.2.2.4)
 - scikit-learn (tested on v.0.22.1)
@@ -22,11 +22,28 @@ This repository is based on [MinCutPool implementation](https://graphneural.netw
 
 ## Image segmentation
 
+<img src="./figs/overseg_and_rag.png" width="700" height="150">
+
+Run [Segmentation.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Segmentation.py) to perform hyper-segmentation, generate a Region Adjacency Graph from the resulting segments, and then cluster the nodes of the RAG graph by means of a GNN equipped with the MinCutPool layer.
+
 ## Clustering
+
+<img src="./figs/clustering_stats.png" width="600" height="250">
+
+Run [Clustering.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Clustering.py) to cluster the nodes of a citation network. The datasets ````cora````, ````citeseer````, and ````pubmed```` can be selected.
+Resutls are provided in terms of homogeneity score, completeness score, and normalized mutual information (v-score).
 
 ## Autoencoder
 
+<img src="./figs/ae_ring.png" width="400" height="200">
+<img src="./figs/ae_grid.png" width="400" height="200">
+
+Run [Autoencoder.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Autoencoder.py) to compute the reconstruction from an Autoencoder with bottleneck. It is possible to switch between the ````ring```` and ````grid````, but also the other point-clouds dataset from the PyGSP library are supported. Results are provided in terms of Mean Squared Error.
+
 ## Graph Classification
+
+Run [Classification.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Classification.py) to train a graph classifier. Additional classification datasets are available [here](https://chrsmrrs.github.io/datasets/) and [here](https://github.com/FilippoMB/Benchmark_dataset_for_graph_classification).
+Results are provided in terms of classification accuray averaged over 10 folds.
 
 ## Citation
 
