@@ -7,7 +7,7 @@ from skimage.color import rgb2gray, gray2rgb
 from skimage.filters import sobel
 from skimage.io import imread
 from keras.models import Model
-from layers import DiffPool, MincutPool
+from spektral.layers import MinCutPool
 from keras import Input
 from keras import backend as K
 from tqdm import tqdm
@@ -123,8 +123,7 @@ elif ALGO == "GNN":
     A_in = Input(tensor=tf.placeholder(tf.float32, shape=(None, None)), name='A_in')
     S_in = Input(tensor=tf.placeholder(tf.int32, shape=(None,), name='segment_ids_in'))
     
-#    pool1, adj1, seg1, C = DiffPool(n_clust, activation='relu')([X_in,  A_in, S_in])
-    pool1, adj1, seg1, C = MincutPool(n_clust, activation=ACTIV, h=H_)([X_in, A_in, S_in])
+    pool1, adj1, seg1, C = MinCutPool(n_clust, activation=ACTIV, h=H_)([X_in, A_in, S_in])
     
     model = Model([X_in, A_in, S_in], [pool1, seg1])
     model.compile('adam', None)

@@ -12,10 +12,10 @@ from keras.models import Model
 from keras.regularizers import l2
 from sklearn.model_selection import train_test_split
 from spektral.layers import GraphConv, GlobalAvgPool, ARMAConv, GraphConvSkip
+from spektral.layers import MinCutPool, DiffPool, TopKPool, SAGPool
 from spektral.utils import batch_iterator, log, init_logging
 from spektral.utils.convolution import normalized_adjacency
 from spektral.layers.ops import sp_matrix_to_sp_tensor_value
-from layers import MincutPool, DiffPool, TopKPool, SAGPool
 from utils.dataset_loader import get_graph_kernel_dataset
 
 
@@ -77,7 +77,7 @@ log(P)
 # Tunables
 tunables = OrderedDict(
     dataset_ID=['PROTEINS'],
-    method=['flat', 'dense', 'diff_pool', 'top_k_pool', 'mincut_pool', 'sag_pool']
+    method=['mincut_pool'] # 'flat', 'dense', 'diff_pool', 'top_k_pool', 'mincut_pool', 'sag_pool'
 )
 log(tunables)
 
@@ -170,7 +170,7 @@ for T in product_dict(**tunables):
             elif P['method'] == 'sag_pool':
                 X_1, A_1, I_1 = SAGPool(0.5)([gc1, A_in, I_in])
             elif P['method'] == 'mincut_pool':
-                X_1, A_1, I_1, M_1 = MincutPool(k=int(average_N // 2),
+                X_1, A_1, I_1, M_1 = MinCutPool(k=int(average_N // 2),
                                                 h=P['mincut_H'],
                                                 activation=P['activ'],
                                                 kernel_regularizer=l2(P['pool_l2']))([gc1, A_in, I_in])
@@ -202,7 +202,7 @@ for T in product_dict(**tunables):
             elif P['method'] == 'sag_pool':
                 X_2, A_2, I_2 = SAGPool(0.5)([gc2, A_1, I_1])
             elif P['method'] == 'mincut_pool':
-                X_2, A_2, I_2, M_2 = MincutPool(k=int(average_N // 4),
+                X_2, A_2, I_2, M_2 = MinCutPool(k=int(average_N // 4),
                                                 h=P['mincut_H'],
                                                 activation=P['activ'],
                                                 kernel_regularizer=l2(P['pool_l2']))([gc2, A_1, I_1])

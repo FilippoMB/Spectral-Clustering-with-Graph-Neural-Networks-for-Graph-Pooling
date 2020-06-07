@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -15,8 +16,7 @@ from sklearn.neighbors import kneighbors_graph
 from spektral.layers.convolutional import GraphConvSkip
 from spektral.utils import init_logging
 from spektral.utils.convolution import normalized_adjacency
-from tqdm import tqdm
-from layers import DiffPool, MincutPool
+from spektral.layers import MinCutPool, DiffPool
 from utils import citation
 from utils.misc import sp_matrix_to_sp_tensor_value, product_dict
 np.random.seed(0)  # for reproducibility
@@ -97,7 +97,6 @@ for T in product_dict(tunables):
         S_in = Input(tensor=tf.placeholder(tf.int32, shape=(None,), name='segment_ids_in'))
 
         if P['apply_GNN'] and P['method'] != 'diff_pool':
-            print('DEBUG--applying GNN')
             A_norm = normalized_adjacency(A)
             X_1 = GraphConvSkip(P['n_channels'],
                                 kernel_initializer='he_normal',
@@ -107,7 +106,7 @@ for T in product_dict(tunables):
             X_1 = X_in
 
         if P['method'] == 'mincut_pool':
-            pool1, adj1, seg1, C = MincutPool(k=n_clust,
+            pool1, adj1, seg1, C = MinCutPool(k=n_clust,
                                               h=P['H_'],
                                               activation=P['ACTIV'])([X_1, A_in, S_in])
 

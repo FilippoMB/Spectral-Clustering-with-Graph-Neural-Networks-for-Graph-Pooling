@@ -6,9 +6,9 @@ from keras import backend as K
 from keras.backend import tf
 from spektral.layers import GraphConvSkip
 from spektral.layers import MinCutPool
+from spektral.utils.convolution import normalized_adjacency
 from utils.misc import sp_matrix_to_sp_tensor_value, get_sw_key
 from tqdm import tqdm
-from spektral.utils.convolution import normalized_adjacency
 from pygsp import graphs
 
 
