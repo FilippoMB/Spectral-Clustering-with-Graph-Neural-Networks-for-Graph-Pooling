@@ -5,7 +5,7 @@
 This code reproduces the experimental results obtained with the MinCutPool layer 
 as presented in the ICML 2020 paper 
 
-[Spectral Clustering with Graph Neural Networks for Graph Pooling](https://arxiv.org/abs/1907.00481)
+[Spectral Clustering with Graph Neural Networks for Graph Pooling](https://arxiv.org/abs/1907.00481)  
 F. M. Bianchi, D. Grattarola, C. Alippi
 
 The official implementation of the MinCutPool layer can be found in 
