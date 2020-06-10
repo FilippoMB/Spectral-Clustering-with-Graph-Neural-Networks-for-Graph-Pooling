@@ -64,7 +64,7 @@ def read_graphs_txt(ds_name):
         i = 0
         for g in graph_list:
             for n in g.nodes():
-                g.nodes[n]['label'] = node_labels[i]
+                g.node[n]['label'] = node_labels[i]
                 i += 1
 
     # Node Attributes
@@ -75,7 +75,7 @@ def read_graphs_txt(ds_name):
         i = 0
         for g in graph_list:
             for n in g.nodes():
-                g.nodes[n]['attributes'] = list(node_attributes[i])
+                g.node[n]['attributes'] = list(node_attributes[i])
                 i += 1
 
     # Classes

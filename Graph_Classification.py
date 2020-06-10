@@ -1,6 +1,7 @@
 import itertools
 import time
 from collections import OrderedDict
+
 import keras.backend as K
 import numpy as np
 import pandas as pd
@@ -13,9 +14,10 @@ from keras.regularizers import l2
 from sklearn.model_selection import train_test_split
 from spektral.layers import GraphConv, GlobalAvgPool, ARMAConv, GraphConvSkip
 from spektral.layers import MinCutPool, DiffPool, TopKPool, SAGPool
+from spektral.layers.ops import sp_matrix_to_sp_tensor_value
 from spektral.utils import batch_iterator, log, init_logging
 from spektral.utils.convolution import normalized_adjacency
-from spektral.layers.ops import sp_matrix_to_sp_tensor_value
+
 from utils.dataset_loader import get_graph_kernel_dataset
 
 
@@ -60,7 +62,7 @@ np.random.seed(seed)
 # Parameters
 P = OrderedDict(
     runs=10,             # Runs to repeat per config
-    data_mode='bench',   # bench / synth 
+    data_mode='bench',   # bench / synth
     GNN_type='GCS',      # Type of GNN {GCN, GCS, Cheb, ARMA}
     n_channels=32,       # Channels per layer
     activ='relu',        # Activation in GNN and mincut
@@ -77,7 +79,7 @@ log(P)
 # Tunables
 tunables = OrderedDict(
     dataset_ID=['PROTEINS'],
-    method=['mincut_pool'] # 'flat', 'dense', 'diff_pool', 'top_k_pool', 'mincut_pool', 'sag_pool'
+    method=['mincut_pool']  # 'flat', 'dense', 'diff_pool', 'top_k_pool', 'mincut_pool', 'sag_pool'
 )
 log(tunables)
 
@@ -99,7 +101,7 @@ for T in product_dict(**tunables):
         ########################################################################
         # LOAD DATA
         ########################################################################
-        if  P['data_mode'] == 'bench':
+        if P['data_mode'] == 'bench':
             A, X, y = get_graph_kernel_dataset(P['dataset_ID'], feat_norm='ohe')
             # Train/test split
             A_train, A_test, \
@@ -112,12 +114,12 @@ for T in product_dict(**tunables):
             loaded = np.load('data/hard.npz', allow_pickle=True)
             X_train, A_train, y_train = loaded['tr_feat'], list(loaded['tr_adj']), loaded['tr_class']
             X_test, A_test, y_test = loaded['te_feat'], list(loaded['te_adj']), loaded['te_class']
-            X_val, A_val, y_val = loaded['val_feat'], list(loaded['val_adj']), loaded['val_class']            
+            X_val, A_val, y_val = loaded['val_feat'], list(loaded['val_adj']), loaded['val_class']
         else:
             raise ValueError
-            
+
         # Parameters
-        F = X_train[0].shape[-1]      # Dimension of node features
+        F = X_train[0].shape[-1]  # Dimension of node features
         n_out = y_train[0].shape[-1]  # Dimension of the target
         average_N = np.ceil(np.mean([a.shape[-1] for a in A_train]))  # Average number of nodes in dataset
 
@@ -279,7 +281,8 @@ for T in product_dict(**tunables):
                 ep = int(current_batch / batches_in_epoch)
                 log('Ep: {:d} - Loss: {:.2f} - Acc: {:.2f} - Val loss: {:.2f} - Val acc: {:.2f}'
                     .format(ep, model_loss, model_acc, val_loss, val_acc))
-                log('{} - Average epoch time: {} +- {}'.format(P['method'], np.mean(epoch_time[1:]), np.std(epoch_time[1:])))
+                log('{} - Average epoch time: {} +- {}'
+                    .format(P['method'], np.mean(epoch_time[1:]), np.std(epoch_time[1:])))
                 epoch_time.append(0)
 
                 if val_loss < best_val_loss:

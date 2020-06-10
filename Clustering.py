@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from tqdm import tqdm
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -10,15 +10,18 @@ from keras.layers import Input
 from keras.models import Model
 from pygsp import graphs
 from sklearn.cluster import spectral_clustering
-from sklearn.datasets.samples_generator import make_blobs
+from sklearn.datasets import make_blobs
 from sklearn.metrics.cluster import v_measure_score, homogeneity_score, completeness_score
 from sklearn.neighbors import kneighbors_graph
+from spektral.layers import MinCutPool, DiffPool
 from spektral.layers.convolutional import GraphConvSkip
 from spektral.utils import init_logging
 from spektral.utils.convolution import normalized_adjacency
-from spektral.layers import MinCutPool, DiffPool
+from tqdm import tqdm
+
 from utils import citation
 from utils.misc import sp_matrix_to_sp_tensor_value, product_dict
+
 np.random.seed(0)  # for reproducibility
 
 PLOTS_ON = True
@@ -36,15 +39,14 @@ log_dir = init_logging()  # Create log directory and file
 
 # Tunables
 tunables = OrderedDict([
-    ('dataset', ['cora']), # 'cora', 'citeseer', 'pubmed'
-    ('method', ['mincut_pool']), # 'mincut_pool', 'diff_pool'
+    ('dataset', ['cora']),  # 'cora', 'citeseer', 'pubmed', 'cloud', or 'synth'
+    ('method', ['mincut_pool']),  # 'mincut_pool', 'diff_pool'
     ('H_', [None]),
     ('n_channels', [16]),
     ('learning_rate', [5e-4])
 ])
 
 N_RUNS = 1
-dataset = None
 df_out = None
 for T in product_dict(tunables):
     # Update params with current config
@@ -63,18 +65,16 @@ for T in product_dict(tunables):
         A = sp.csr_matrix(A, dtype=np.float32)
         n_clust = y.max() + 1
     elif P['dataset'] == 'cloud':
-        G = graphs.Grid2d(N1=15, N2=10) #Community(N=150, seed=0) #SwissRoll(N=400, seed=0) #Ring(N=100) #TwoMoons()  #Cube(nb_pts=500)  #Bunny()
+        G = graphs.Grid2d(N1=15, N2=10)  # Community(N=150, seed=0) #SwissRoll(N=400, seed=0) #Ring(N=100) #TwoMoons()  #Cube(nb_pts=500)  #Bunny()
         X = G.coords.astype(np.float32)
         A = G.W
         y = np.ones(X.shape[0])  # X[:,0] + X[:,1]
         n_clust = 5
     else:
-        if dataset != P['dataset']:
-            dataset = P['dataset']
-            A, X, _, _, _, _, _, _, y_ohe = citation.load_data(dataset)
-            y = np.argmax(y_ohe, axis=-1)
-            X = X.todense()
-            n_clust = y.max() + 1
+        A, X, _, _, _, _, _, _, y_ohe = citation.load_data(P['dataset'])
+        y = np.argmax(y_ohe, axis=-1)
+        X = X.todense()
+        n_clust = y.max() + 1
 
     # Sort IDs
     if P['dataset'] != 'cloud':
@@ -206,12 +206,12 @@ for T in product_dict(tunables):
             plt.scatter(X[:, 0], X[:, 1], c=c)
             plt.title('GNN-pool clustering')
         if P['dataset'] == 'cloud':
-            fig, ax = plt.subplots(1,1,figsize=(3,3))
-            G.plot_signal(c, vertex_size=30,  plot_name='', colorbar=False,ax=ax)
+            fig, ax = plt.subplots(1, 1, figsize=(3, 3))
+            G.plot_signal(c, vertex_size=30, plot_name='', colorbar=False, ax=ax)
             ax.set_xticks([])
             ax.set_yticks([])
             plt.tight_layout()
-            plt.savefig('logs/grid_mincut.pdf', bbox_inches = 'tight', pad_inches = 0)
+            plt.savefig('logs/grid_mincut.pdf', bbox_inches='tight', pad_inches=0)
         plt.show()
 
     # Spectral clustering
@@ -220,7 +220,8 @@ for T in product_dict(tunables):
     P['complete_score_sc'] = completeness_score(y, sc)
     P['v_score_sc'] = v_measure_score(y, sc)
 
-    print('Spectral Clust - HOMO: {:.2}, CS: {:2}, NMI: {:2}'.format(P['homo_score_sc'], P['complete_score_sc'], P['v_score_sc']))
+    print('Spectral Clust - HOMO: {:.3f}, CS: {:.3f}, NMI: {:.3f}'
+          .format(P['homo_score_sc'], P['complete_score_sc'], P['v_score_sc']))
 
     if df_out is None:
         df_out = pd.DataFrame([P])
@@ -234,10 +235,10 @@ for T in product_dict(tunables):
             plt.title('Spectral clustering')
             plt.show()
         if P['dataset'] == 'cloud':
-            fig, ax = plt.subplots(1,1,figsize=(3,3))
-            G.plot_signal(sc, vertex_size=30,  plot_name='', colorbar=False,ax=ax)
+            fig, ax = plt.subplots(1, 1, figsize=(3, 3))
+            G.plot_signal(sc, vertex_size=30, plot_name='', colorbar=False, ax=ax)
             ax.set_xticks([])
             ax.set_yticks([])
             plt.tight_layout()
-            plt.savefig('logs/grid_spectral.pdf', bbox_inches = 'tight', pad_inches = 0)
+            plt.savefig('logs/grid_spectral.pdf', bbox_inches='tight', pad_inches=0)
     K.clear_session()
