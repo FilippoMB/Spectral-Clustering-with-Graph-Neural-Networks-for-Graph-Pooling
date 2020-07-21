@@ -67,7 +67,7 @@ Please, cite the original paper if you are using MinCutPool in your research
         title={Spectral Clustering with Graph Neural Networks for Graph Pooling},
         author={Bianchi, Filippo Maria and Grattarola, Daniele and Alippi, Cesare},
         booktitle={Proceedings of the 37th international conference on Machine learning},
-        pages={},
+        pages={2729-2738},
         year={2020},
         organization={ACM}
     }
