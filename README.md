@@ -12,7 +12,7 @@ The official implementation of the MinCutPool layer can be found in
 [Spektral](https://graphneural.network/layers/pooling/#mincutpool). 
 
 An implementation of MinCutPool for PyTorch is also available in 
-[Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool).
+[Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.dense_mincut_pool).
 
 ## Setup
 
