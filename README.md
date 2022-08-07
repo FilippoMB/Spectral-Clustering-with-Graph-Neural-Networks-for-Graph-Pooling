@@ -5,14 +5,14 @@
 This code reproduces the experimental results obtained with the MinCutPool layer 
 as presented in the ICML 2020 paper 
 
-[Spectral Clustering with Graph Neural Networks for Graph Pooling](https://arxiv.org/pdf/1907.00481.pdf)  
+[Spectral Clustering with Graph Neural Networks for Graph Pooling](https://arxiv.org/abs/1907.00481)  
 F. M. Bianchi*, D. Grattarola*, C. Alippi
 
-The official implementation of the MinCutPool layer can be found in 
+The official Tensorflow implementation of the MinCutPool layer is in 
 [Spektral](https://graphneural.network/layers/pooling/#mincutpool). 
 
-An implementation of MinCutPool for PyTorch is also available in 
-[Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.dense_mincut_pool).
+The PyTorch implementation of MinCutPool is in 
+[Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool).
 
 ## Setup
 
@@ -42,6 +42,9 @@ to cluster the nodes of a citation network. The datasets `cora`, `citeseer`, and
 Results are provided in terms of homogeneity score, completeness score, and 
 normalized mutual information (v-score).
 
+### Pytorch
+[Clustering_pytorch.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Clustering_pytorch.py) contains a basic implementation in Pytorch based on [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool).
+
 ## Autoencoder
 
 <img src="./figs/ae_ring.png" width="400" height="200">
@@ -58,6 +61,9 @@ are supported. Results are provided in terms of the Mean Squared Error.
 
 Run [Graph_Classification.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Graph_Classification.py) to train a graph classifier. Additional classification datasets are available [here](https://chrsmrrs.github.io/datasets/) (drop them in ````data/classification/````) and [here](https://github.com/FilippoMB/Benchmark_dataset_for_graph_classification) (drop them in ````data/````).
 Results are provided in terms of classification accuracy averaged over 10 runs.
+
+### Pytorch
+A basic Pytorch implementation of the graph classification task can be found in this [example](https://github.com/pyg-team/pytorch_geometric/blob/a238110ff5ac772656c967f135fa138add6dabb4/examples/proteins_mincut_pool.py) from Pytorch Geometric.
 
 ## Citation
 
