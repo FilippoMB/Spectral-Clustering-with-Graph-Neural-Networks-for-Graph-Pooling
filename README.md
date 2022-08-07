@@ -12,7 +12,7 @@ The official Tensorflow implementation of the MinCutPool layer is in
 [Spektral](https://graphneural.network/layers/pooling/#mincutpool). 
 
 The PyTorch implementation of MinCutPool is in 
-[Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool).
+[Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.dense_mincut_pool).
 
 ## Setup
 
@@ -42,8 +42,8 @@ to cluster the nodes of a citation network. The datasets `cora`, `citeseer`, and
 Results are provided in terms of homogeneity score, completeness score, and 
 normalized mutual information (v-score).
 
-### Pytorch
-[Clustering_pytorch.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Clustering_pytorch.py) contains a basic implementation in Pytorch based on [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.mincut_pool.dense_mincut_pool).
+#### Pytorch
+[Clustering_pytorch.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Clustering_pytorch.py) contains a basic implementation in Pytorch based on [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.dense.dense_mincut_pool).
 
 ## Autoencoder
 
@@ -62,7 +62,7 @@ are supported. Results are provided in terms of the Mean Squared Error.
 Run [Graph_Classification.py](https://github.com/FilippoMB/Spectral-Clustering-with-Graph-Neural-Networks-for-Graph-Pooling/blob/master/Graph_Classification.py) to train a graph classifier. Additional classification datasets are available [here](https://chrsmrrs.github.io/datasets/) (drop them in ````data/classification/````) and [here](https://github.com/FilippoMB/Benchmark_dataset_for_graph_classification) (drop them in ````data/````).
 Results are provided in terms of classification accuracy averaged over 10 runs.
 
-### Pytorch
+#### Pytorch
 A basic Pytorch implementation of the graph classification task can be found in this [example](https://github.com/pyg-team/pytorch_geometric/blob/a238110ff5ac772656c967f135fa138add6dabb4/examples/proteins_mincut_pool.py) from Pytorch Geometric.
 
 ## Citation
