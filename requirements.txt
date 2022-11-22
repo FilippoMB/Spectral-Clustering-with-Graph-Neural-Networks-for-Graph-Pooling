@@ -23,7 +23,7 @@ networkx==2.3
 numpy==1.18.4
 opt-einsum==3.2.1
 pandas==0.24.2
-Pillow==7.1.2
+Pillow==9.3.0
 protobuf==3.12.2
 pygraphviz==1.5
 PyGSP==0.5.1
