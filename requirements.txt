@@ -42,7 +42,7 @@ tensorboard==1.15.0
 tensorflow==1.15.2
 tensorflow-estimator==1.15.1
 termcolor==1.1.0
-tqdm==4.46.0
+tqdm==4.66.3
 urllib3==1.25.9
 Werkzeug==3.0.3
 wrapt==1.12.1
