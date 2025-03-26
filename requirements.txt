@@ -12,7 +12,7 @@ idna==3.7
 imageio==2.8.0
 importlib-metadata==1.6.0
 joblib==0.14.1
-Keras==2.2.4
+Keras==2.13.1
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 kiwisolver==1.1.0
